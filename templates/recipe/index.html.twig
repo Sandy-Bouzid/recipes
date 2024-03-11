@@ -4,8 +4,11 @@
 {% endblock %}
 
 {% block body %}
-	Mes recettes :
+	<h2>Mes recettes :</h2>
+	<p>{{ totalDuration }} minutes de cuisine !</p>
 	<ul>
-		<li><a href="{{ path('recipe.show', {id: 15, slug:'p-ates'}) }}">Pates</a></li>
+	{% for recipe in recipes %}
+		<li><a href="{{ path('recipe.show', {id: recipe.id, slug:recipe.slug}) }}">{{ recipe.title }}</a></li>
+	{% endfor %}
 	</ul>
 {% endblock %}
