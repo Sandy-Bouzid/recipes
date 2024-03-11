@@ -22,7 +22,10 @@ class RecipeController extends AbstractController
             'recipe/show.html.twig',
             [
                 'slug' => $slug,
-                'id' => $id
+                'id' => $id,
+                'test' => [
+                    'val1'=>'coucou',
+                ]
             ]
         );
     }

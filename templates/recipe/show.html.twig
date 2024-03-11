@@ -3,5 +3,6 @@
 {% block title %}{{ slug }}{% endblock %}
 
 {% block body %}
-    La recette : {{ slug }} n° {{ id }}
+    La recette : {{ slug | upper }} n° {{ id }}
+
 {% endblock %}

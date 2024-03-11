@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Toutes les recettes{% endblock %}
+{% block title %}Toutes les recettes
+{% endblock %}
 
 {% block body %}
-    test
+	Mes recettes :
+	<ul>
+		<li><a href="{{ path('recipe.show', {id: 15, slug:'p-ates'}) }}">Pates</a></li>
+	</ul>
 {% endblock %}
