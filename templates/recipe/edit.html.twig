@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Recette :
+	{{ recipe.title }}
+{% endblock %}
+
+{% block body %}
+	<h1>La recette n°
+		{{ recipe.id }}
+		:
+		{{ recipe.title | upper }}
+	</h1>
+
+	{# Début du form #}
+	{{ form_start(form) }}
+	{# Personnalisation avec les noms des champs #}
+
+	<div class="d-flex">
+		{{ form_row(form.title) }}
+		{{ form_row(form.duration) }}
+	</div>
+
+	{# Fin du form avec ajout automatique des champs non personnalisés#}
+	{{ form_end(form) }}
+
+{% endblock %}

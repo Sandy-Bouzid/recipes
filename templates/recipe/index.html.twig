@@ -4,11 +4,37 @@
 {% endblock %}
 
 {% block body %}
-	<h2>Mes recettes :</h2>
-	<p>{{ totalDuration }} minutes de cuisine !</p>
-	<ul>
-	{% for recipe in recipes %}
-		<li><a href="{{ path('recipe.show', {id: recipe.id, slug:recipe.slug}) }}">{{ recipe.title }}</a></li>
-	{% endfor %}
-	</ul>
+	<h1>Mes recettes :</h1>
+	<h2>{{ totalDuration }}
+		minutes de cuisine !</h2>
+	<a href="{{ path('recipe.add') }}" class="btn btn-info">Ajouter</a>
+	<table class="table">
+
+		<thead>
+			<tr>
+				<th>Titre</th>
+				<th>Actions</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			{% for recipe in recipes %}
+				<tr>
+					<td>
+						<a href="{{ path('recipe.show', {id: recipe.id, slug:recipe.slug}) }}">{{ recipe.title }}</a>
+					</td>
+					<td>
+						<div class="d-flex gap-1">
+							<a href="{{ path('recipe.edit', {id: recipe.id,}) }}" class="btn btn-warning btn-sm">Modifier</a>
+							<form action="{{ path('recipe.delete', {id: recipe.id,}) }}" method="post">
+								<input type="hidden" name="_method" value="DELETE">
+								<button type="submit" class="btn btn-danger btn-sm">Supprimer</a>
+							</form>
+						</div>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
 {% endblock %}
