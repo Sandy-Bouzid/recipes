@@ -8,7 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,15 +20,21 @@ class RecipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('slug', TypeTextType::class, [
+            ->add('title', TextType::class, [
+                'empty_data' => '',
+            ])
+            ->add('slug', TextType::class, [
                 'required' => false,
             ])
-            ->add('content')
+            ->add('content', TextareaType::class, [
+                'empty_data' => '',
+            ])
             ->add('duration')
-            ->add('enregistrer', SubmitType::class)
+            ->add('save', SubmitType::class, [
+                'label' => 'Enregistrer'
+            ])
             ->addEventListener(FormEvents::PRE_SUBMIT, $this->autoSlug(...))
-            ->addEventListener(FormEvents::POST_SUBMIT, $this->autoDate(...))
+            ->addEventListener(FormEvents::POST_SUBMIT, $this->autoDateTime(...))
         ;
     }
 
@@ -46,7 +53,7 @@ class RecipeType extends AbstractType
         }
     }
 
-    public function autoDate(PostSubmitEvent $event): void
+    public function autoDateTime(PostSubmitEvent $event): void
     {
         $data = $event->getData();
 

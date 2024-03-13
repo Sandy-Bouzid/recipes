@@ -67,25 +67,18 @@ class RecipeController extends AbstractController
     #[Route('/recettes/{id}/edit', name: 'recipe.edit', requirements: ['id' => '\d+'], methods:['GET', 'POST'])]
     public function edit(Recipe $recipe, Request $request, EntityManagerInterface $em): Response
     {
-        // créer le formulaire
         $form = $this->createForm(RecipeType::class, $recipe);
 
-        // Gérer la requête : récupère la donnée entrée dans le form et exécute le setter correspondant
         $form->handleRequest($request);
 
-        // Vérifier si le form a bien été envoyé et s'il est valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Sauvegarder les modifications faite sur l'entité par handleRequest
             $em->flush();
 
-            // Ajouter un message flash
             $this->addFlash('success', 'La recette a bien été modifiée');
 
-            // Rediriger l'utilisateur
             return $this->redirectToRoute('recipe.show', ['slug' => $recipe->getSlug(), 'id' => $recipe->getId()]);
         }
 
-        // Rendre la vue avec les données
         return $this->render('recipe/edit.html.twig', [
             'recipe' => $recipe,
             'form' => $form
