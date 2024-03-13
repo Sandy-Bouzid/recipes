@@ -7,3 +7,8 @@
 `bin/console doctrine:database:create`
 - exécuter les migrations présentes dans le projet (s'il y en a) : 
 `bin/console doctrine:migrations:migrate`
+
+- Configurer la boîte mail dans `.env.local`
+	- ``MAILER_DSN=smtp:null://localhost:1025``
+
+    
