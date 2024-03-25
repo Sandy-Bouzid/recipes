@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin.html.twig' %}
 
 {% block title %}
 	Recette :
@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-	<h1>La recette n°
+	<h1>Modifier la recette n°
 		{{ recipe.id }}
 		:
 		{{ recipe.title | upper }}
