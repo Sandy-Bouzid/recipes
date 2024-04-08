@@ -20,12 +20,9 @@ class RecipeController extends AbstractController
     public function index(RecipeRepository $recipeRepository): Response
     {
         $recipes = $recipeRepository->findWithCategory();
-
-        $totalDuration = $recipeRepository->findTotalDuration();
-
+        
         return $this->render('admin/recipe/index.html.twig', [
-            'recipes' => $recipes,
-            'totalDuration' => $totalDuration
+            'recipes' => $recipes
         ]);
     }
 

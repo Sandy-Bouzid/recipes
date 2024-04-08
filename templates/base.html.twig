@@ -25,7 +25,10 @@
 							<a class="nav-link {{ app.current_route == 'home' ? 'active' : '' }}" href="{{ path('home') }}">Accueil</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link {{ app.current_route starts with 'recipe.' ? 'active' : '' }}" href="{{ path('recipe.index') }}">Recettes</a>
+							<a class="nav-link {{ app.current_route starts with 'contact' ? 'active' : '' }}" href="{{ path('contact') }}">Contact</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('admin.home') }}">Administration</a>
 						</li>
 					</ul>
 				</div>
