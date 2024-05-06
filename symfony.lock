@@ -288,6 +288,9 @@
             "./config/packages/messenger.yaml"
         ]
     },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.17.0"
+    },
     "vich/uploader-bundle": {
         "version": "2.3",
         "recipe": {
