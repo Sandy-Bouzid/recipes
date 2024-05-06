@@ -19,12 +19,16 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class RecipeController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(RecipeRepository $recipeRepository): Response
+    public function index(RecipeRepository $recipeRepository, Request $request): Response
     {
-        $recipes = $recipeRepository->findWithCategory();
-        
+        $page = $request->query->getInt('page', 1);
+        $limit = 1;
+        $recipes = $recipeRepository->paginateRecipes($page, $limit);
+        $maxPage = ceil($recipes->count() / $limit);
         return $this->render('admin/recipe/index.html.twig', [
-            'recipes' => $recipes
+            'recipes' => $recipes,
+            'maxPage' => $maxPage,
+            'page' => $page
         ]);
     }
 
@@ -48,7 +52,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods:['GET', 'POST'])]
+    #[Route('/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET', 'POST'])]
     public function edit(Recipe $recipe, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -69,7 +73,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods:['DELETE'])]
+    #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]
     public function delete(Recipe $recipe, EntityManagerInterface $em): Response
     {
         $em->remove($recipe);

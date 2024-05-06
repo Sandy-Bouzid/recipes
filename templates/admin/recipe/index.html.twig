@@ -38,4 +38,12 @@
 		</tbody>
 	</table>
 
+	<div class="d-flex justify-content-center gap-1">
+		{% if page > 1 %}
+			<a href="{{ path('admin.recipe.index', {page: page - 1}) }}" class="btn btn-info">Page Précédente</a>
+		{% endif %}
+		{% if page < maxPage %}
+			<a href="{{ path('admin.recipe.index', {page: page + 1}) }}" class="btn btn-info">Page Suivante</a>
+		{% endif %}
+	</div>
 {% endblock %}
