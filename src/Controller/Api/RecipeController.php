@@ -11,14 +11,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/api/recipes', methods: ['GET'])]
+#[Route('/api/recipes')]
 class RecipeController extends AbstractController
 {
-    #[Route('/', name: 'index')]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(RecipeRepository $recipeRepository): Response
     {
         $recipes = $recipeRepository->findAll();
@@ -31,7 +32,7 @@ class RecipeController extends AbstractController
         );
     }
 
-    #[Route('/{id}', requirements: ['id' => Requirement::DIGITS])]
+    #[Route('/{id}', requirements: ['id' => Requirement::DIGITS], methods: ['GET'])]
     public function show(Recipe $recipe): Response
     {
         return $this->json(
@@ -47,12 +48,19 @@ class RecipeController extends AbstractController
     {
         $recipe = new Recipe();
 
-        $serializer->deserialize($request->getContent(), Recipe::class, 'json', [
-            // pour hydrater directement avec les données désérialisées (sans faire les setter)
-            AbstractNormalizer::OBJECT_TO_POPULATE => $recipe,
-            // éléments  modifiables
-            'groups' => 'recipes.create'
-        ]);
+        try {
+            $serializer->deserialize($request->getContent(), Recipe::class, 'json', [
+                // pour hydrater directement avec les données désérialisées (sans faire les setter)
+                AbstractNormalizer::OBJECT_TO_POPULATE => $recipe,
+                // éléments  modifiables
+                'groups' => 'recipes.create'
+            ]);
+        } catch (NotEncodableValueException $e) {
+            return $this->json(
+                ["error" => 'JSON INVALIDE'],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
 
         $recipe->setSlug(strtolower($slugger->slug($recipe->getTitle())));
         $recipe->setCreatedAt(new \DateTimeImmutable());

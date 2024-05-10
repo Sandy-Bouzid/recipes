@@ -9,10 +9,20 @@ security:
             entity:
                 class: App\Entity\User
                 property: username
+        api_user_provider:
+            entity:
+                class: App\Entity\User
+                property: apiToken
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api:
+            pattern: ^/api/
+            lazy: true
+            provider: api_user_provider
+            custom_authenticator: App\Security\ApiAuthenticator
+            stateless: true
         main:
             lazy: true
             provider: app_user_provider
