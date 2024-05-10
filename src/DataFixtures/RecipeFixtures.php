@@ -40,7 +40,7 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
             $recipe = new Recipe();
             $title = $faker->foodname();
             $recipe->setTitle($title)
-                ->setSlug($this->slugger->slug($title))
+                ->setSlug(strtolower($this->slugger->slug($title)))
                 ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTime()))
                 ->setUpdatedAt(\DateTimeImmutable::createFromMutable($faker->dateTime()))
                 ->setContent($faker->paragraph(10, true))
