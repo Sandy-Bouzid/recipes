@@ -27,7 +27,7 @@ class Recipe
     #[ORM\Column(length: 255)]
     #[Assert\Length(min: 5)]
     #[BanWords()]
-    #[Groups(['recipes.index', 'recipes.show'])]
+    #[Groups(['recipes.index', 'recipes.show', 'recipes.create'])]
     private string $title = '';
 
     #[ORM\Column(length: 255)]
@@ -38,7 +38,7 @@ class Recipe
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(min: 5)]
-    #[Groups(['recipes.show'])]
+    #[Groups(['recipes.show', 'recipes.create'])]
     private string $content = '';
 
     #[ORM\Column]
@@ -52,7 +52,7 @@ class Recipe
     #[ORM\Column(nullable: true)]
     #[Assert\Positive()]
     #[Assert\LessThan(value:1440)]
-    #[Groups(['recipes.index', 'recipes.show'])]
+    #[Groups(['recipes.index', 'recipes.show', 'recipes.create'])]
     private ?int $duration = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes', cascade:['persist'])]
