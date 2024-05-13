@@ -27,9 +27,11 @@
 						<li class="nav-item">
 							<a class="nav-link {{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ path('admin.recipe.index') }}">Recettes</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link {{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ path('admin.category.index') }}">Catégories</a>
-						</li>
+						{% if is_granted('ROLE_ADMIN') %}
+							<li class="nav-item">
+								<a class="nav-link {{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ path('admin.category.index') }}">Catégories</a>
+							</li>
+						{% endif %}
 						<li class="nav-item">
 							<a class="nav-link" href="{{ path('home') }}">Site</a>
 						</li>
@@ -40,9 +42,9 @@
 				</div>
 			</div>
 		</nav>
-		<div class="container my-4"> 
+		<div class="container my-4">
 			{% include 'partials/flash.html.twig' %}
-            {% block body %}{% endblock %}
+			{% block body %}{% endblock %}
 		</div>
-    </body>
-	</html>
+	</body>
+</html>

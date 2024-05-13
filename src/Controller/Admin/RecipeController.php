@@ -3,12 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Recipe;
+use App\Event\RecipeCreatedEvent;
 use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
 use App\Security\Voter\RecipeVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -36,16 +38,18 @@ class RecipeController extends AbstractController
 
     #[Route('/create', name: 'create')]
     #[IsGranted(RecipeVoter::CREATE)]
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em, EventDispatcherInterface $dispatcher, Security $security): Response
     {
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $recipe->setUser($security->getUser());
             $em->persist($recipe);
             $em->flush();
 
+            $dispatcher->dispatch(new RecipeCreatedEvent($recipe));
             $this->addFlash('success', 'La recette a bien été enregistrée');
             return $this->redirectToRoute('admin.recipe.index');
         }
