@@ -29,7 +29,7 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < count($categories); $i++) {
             $category = new Category();
             $category->setName($categories[$i])
-                ->setSlug($this->slugger->slug($categories[$i]))
+                ->setSlug(strtolower($this->slugger->slug($categories[$i])))
                 ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTime()))
                 ->setUpdatedAt(\DateTimeImmutable::createFromMutable($faker->dateTime()));
             $manager->persist($category);
