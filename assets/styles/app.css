@@ -1,3 +1,16 @@
-/* body {
-    background-color: skyblue;
-} */
+body {
+    background-image: url('/images/home.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.container {
+    background-color: #f59d0a;
+    border-radius: 10px;
+    padding: 2em;
+}
+
+.navbar {
+    background-color: #6d2502;
+}
