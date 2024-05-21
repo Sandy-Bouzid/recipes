@@ -14,3 +14,7 @@
 
 - Ouvrir un serveur Symfony (pour symfony UX)
 	- `symfony serve`
+
+
+Page d'accueil en français: http://localhost:8000/fr/
+HomePage in English: http://localhost:8000/en/

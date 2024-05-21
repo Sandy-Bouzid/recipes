@@ -1,11 +1,11 @@
 {% extends 'admin/admin.html.twig' %}
 
 {% block title %}
-	Nouvelle catégorie
+	{{ 'Nouvelle catégorie' | trans }}
 {% endblock %}
 
 {% block body %}
-	<h1>Ajouter une nouvelle catégorie</h1>
+	<h1>{{ 'Ajouter une nouvelle catégorie' | trans }}</h1>
 
 
 	{{ form(form) }}

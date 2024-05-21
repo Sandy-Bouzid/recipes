@@ -1,0 +1,58 @@
+categoryForm.name: Nom
+categoryForm.slug: Slug
+categoryForm.submit: Enregistrer
+contactForm.name: Nom
+contactForm.email: Courriel
+contactForm.message: Message
+contactForm.submit: 'Envoyer le message'
+contactForm.amount: Quantité
+contactForm.unit: Unité
+quantityForm.ingredient: Ingrédient
+recipeForm.title: Titre
+recipeForm.slug: Slug
+recipeForm.thumnailFile: Image
+recipeForm.category: Catégorie
+recipeForm.content: Contenu
+recipeForm.duration: Durée
+recipeForm.quantities: Quantités
+recipeForm.submit: Enregistrer
+registerForm.username: Nom de l'utilisateur
+registerForm.email: Courriel
+registerForm.agreeTerms: "Accepter les conditions d'utilisation"
+registerForm.password: 'Mot de passe'
+registerForm.submit: 'Enregistrer le compte'
+Accueil: Accueil
+Recettes: Recettes
+Catégories: Catégories
+Site: Site
+'Se déconnecter': 'Se déconnecter'
+'Nouvelle catégorie': 'Nouvelle catégorie'
+'Ajouter une nouvelle catégorie': 'Ajouter une nouvelle catégorie'
+Catégorie: Catégorie
+'Modifier la categorie': 'Modifier la categorie'
+'Ajouter une catégorie': 'Ajouter une catégorie'
+Nom: Nom
+Total: Total
+Modifier: Modifier
+Supprimer: Supprimer
+'Accueil Administration': 'Accueil Administration'
+"Bienvenue dans l'Administration !": "Bienvenue dans l'Administration !"
+'Nouvelle recette': 'Nouvelle recette'
+'Ajouter une nouvelle recette': 'Ajouter une nouvelle recette'
+Recette: Recette
+'Modifier la recette': 'Modifier la recette'
+'Toutes les recettes': 'Toutes les recettes'
+Ajouter: Ajouter
+Cuisine: Cuisine
+Contact: Contact
+'Se connecter': 'Se connecter'
+"S'enregistrer": "S'enregistrer"
+'Nous contacter': 'Nous contacter'
+'Bienvenue sur le site !': 'Bienvenue sur le site !'
+"S'enregister": "S'enregister"
+'Se connecter !': 'Se connecter !'
+'Vous êtes connecté en tant que': 'Vous êtes connecté en tant que'
+'Veuillez vous connecter': 'Veuillez vous connecter'
+"Nom d'utilisateur": "Nom d'utilisateur"
+'Mot de passe': 'Mot de passe'
+'Se rappeler de moi': 'Se rappeler de moi'

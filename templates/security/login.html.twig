@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{ 'Se connecter !' | trans  }}{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -10,14 +10,14 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            {{ 'Vous êtes connecté en tant que' | trans  }} {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">{{ 'Se déconnecter' | trans  }}</a>
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
+    <h1 class="h3 mb-3 font-weight-normal">{{ 'Veuillez vous connecter' | trans  }}</h1>
+    <label for="inputUsername">{{ 'Nom d\'utilisateur' | trans  }}</label>
     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
+    <label for="inputPassword">{{ 'Mot de passe' | trans  }}</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
@@ -26,12 +26,12 @@
 
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" name="_remember_me"> Remember me
+            <input type="checkbox" name="_remember_me"> {{ 'Se rappeler de moi' | trans  }}
         </label>
     </div>
 
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        {{ 'Se connecter' | trans  }}
     </button>
 </form>
 {% endblock %}

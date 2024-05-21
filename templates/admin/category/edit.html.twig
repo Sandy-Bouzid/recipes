@@ -1,11 +1,11 @@
 {% extends 'admin/admin.html.twig' %}
 
 {% block title %}
-	Catégorie : {{ category.name }}
+	{{ 'Catégorie' | trans }} : {{ category.name }}
 {% endblock %}
 
 {% block body %}
-	<h1>Modifier la categorie n°
+	<h1>{{ 'Modifier la categorie' | trans }} n°
 		{{ category.id }}
 		:
 		{{ category.name | upper }}

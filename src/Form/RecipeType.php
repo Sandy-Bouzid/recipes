@@ -9,12 +9,14 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use function Symfony\Component\Translation\t;
 
 class RecipeType extends AbstractType
 {
@@ -27,22 +29,30 @@ class RecipeType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'empty_data' => '',
+                'label' => t('recipeForm.title')
             ])
             ->add('slug', TextType::class, [
                 'required' => false,
+                'label' => t('recipeForm.slug')
             ])
             ->add('thumbnailFile', FileType::class, [
                 'required' => false,
+                'label' => t('recipeForm.thumnailFile')
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label'=> 'name',
+                'label' => t('recipeForm.category')
             ])
             ->add('content', TextareaType::class, [
                 'empty_data' => '',
+                'label' => t('recipeForm.content')
             ])
-            ->add('duration')
+            ->add('duration', NumberType::class,[
+                'label' => t('recipeForm.duration')
+            ])
             ->add('quantities', CollectionType::class, [
+                'label' => t('recipeForm.quantities'),
                 'entry_type' => QuantityType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
@@ -54,7 +64,7 @@ class RecipeType extends AbstractType
                 ]
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Enregistrer'
+                'label' => t('recipeForm.submit')
             ])
             ->addEventListener(FormEvents::PRE_SUBMIT, $this->formListenerFactory->autoSlug('title'))
             ->addEventListener(FormEvents::POST_SUBMIT, $this->formListenerFactory->timestamps())

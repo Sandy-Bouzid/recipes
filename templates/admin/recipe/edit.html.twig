@@ -1,12 +1,12 @@
 {% extends 'admin/admin.html.twig' %}
 
 {% block title %}
-	Recette :
+	{{ 'Recette' | trans }} :
 	{{ recipe.title }}
 {% endblock %}
 
 {% block body %}
-	<h1>Modifier la recette n°
+	<h1>{{ 'Modifier la recette' | trans }} n°
 		{{ recipe.id }}
 		:
 		{{ recipe.title | upper }}

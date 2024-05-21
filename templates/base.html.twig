@@ -21,17 +21,17 @@
 	<body>
 		<nav class="navbar bg-secondary navbar-expand-lg" data-bs-theme="dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="{{ path('home') }}">Cuisine</a>
+				<a class="navbar-brand" href="{{ path('home') }}">{{ 'Cuisine' | trans  }}</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link {{ app.current_route == 'home' ? 'active' : '' }}" href="{{ path('home') }}">Accueil</a>
+							<a class="nav-link {{ app.current_route == 'home' ? 'active' : '' }}" href="{{ path('home') }}">{{ 'Accueil' | trans  }}</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link {{ app.current_route starts with 'contact' ? 'active' : '' }}" href="{{ path('contact') }}">Contact</a>
+							<a class="nav-link {{ app.current_route starts with 'contact' ? 'active' : '' }}" href="{{ path('contact') }}">{{ 'Contact' | trans  }}</a>
 						</li>
 						<div class="d-flex gap-2">
 							{% if is_granted('ROLE_USER') %}
@@ -39,14 +39,14 @@
 									<a class="nav-link" href="{{ path('admin.home') }}">Administration</a>
 								</li>
 								<li class="nav-item">
-									<a class="btn btn-danger" href="{{ path('app_logout') }}">Logout</a>
+									<a class="btn btn-danger" href="{{ path('app_logout') }}">{{ 'Se déconnecter' | trans  }}</a>
 								</li>
 							{% else %}
 								<li class="nav-item">
-									<a class="btn btn-info" href="{{ path('app_login') }}">Se connecter</a>
+									<a class="btn btn-info" href="{{ path('app_login') }}">{{ 'Se connecter' | trans  }}</a>
 								</li>
 								<li class="nav-item">
-									<a class="btn btn-success" href="{{ path('app_register') }}">S'enregistrer</a>
+									<a class="btn btn-success" href="{{ path('app_register') }}">{{ 'S\'enregistrer' | trans  }}</a>
 								</li>
 							{% endif %}
 						</div>

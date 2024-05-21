@@ -1,11 +1,11 @@
 {% extends 'admin/admin.html.twig' %}
 
 {% block title %}
-	Nouvelle recette
+	{{ 'Nouvelle recette' | trans }}
 {% endblock %}
 
 {% block body %}
-	<h1>Ajouter une nouvelle recette</h1>
+	<h1>{{ 'Ajouter une nouvelle recette' | trans }}</h1>
 
 
 	{{ form_start(form) }}

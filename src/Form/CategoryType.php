@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use function Symfony\Component\Translation\t;
 
 class CategoryType extends AbstractType
 {
@@ -21,12 +22,14 @@ class CategoryType extends AbstractType
         $builder
         ->add('name', TextType::class, [
             'empty_data' => '',
+            'label' => t('categoryForm.name')
         ])
         ->add('slug', TextType::class, [
             'required' => false,
+            'label' => t('categoryForm.slug')
         ])
         ->add('save', SubmitType::class, [
-            'label' => 'Enregistrer'
+            'label' => t('categoryForm.submit')
         ])
         ->addEventListener(FormEvents::PRE_SUBMIT, $this->formListenerFactory->autoSlug('name'))
         ->addEventListener(FormEvents::POST_SUBMIT, $this->formListenerFactory->timestamps())

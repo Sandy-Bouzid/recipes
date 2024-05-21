@@ -1,19 +1,19 @@
 {% extends 'admin/admin.html.twig' %}
 
-{% block title %}Toutes les recettes
+{% block title %}{{ 'Toutes les recettes' | trans  }}
 {% endblock %}
 
 {% block body %}
-	<h1>Recettes</h1>
+	<h1>{{ 'Recettes' | trans  }}</h1>
 
-	<a href="{{ path('admin.recipe.create') }}" class="btn btn-info">Ajouter</a>
+	<a href="{{ path('admin.recipe.create') }}" class="btn btn-info">{{ 'Ajouter' | trans  }}</a>
 	<table class="table">
 
 		<thead>
 			<tr>
 				<th>{{ knp_pagination_sortable(recipes, 'ID', 'r.id')}}</th>
 				<th>{{ knp_pagination_sortable(recipes, 'Titre', 'r.title')}}</th>
-				<th>Catégorie</th>
+				<th>{{ 'Catégorie' | trans  }}</th>
 				<th style="width: 200px">Actions</th>
 			</tr>
 
@@ -28,10 +28,10 @@
 					<td>{{recipe.category.name | default }}</td>
 					<td>
 						<div class="d-flex gap-1">
-							<a href="{{ path('admin.recipe.edit', {id: recipe.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+							<a href="{{ path('admin.recipe.edit', {id: recipe.id}) }}" class="btn btn-warning btn-sm">{{ 'Modifier' | trans  }}</a>
 							<form action="{{ path('admin.recipe.delete', {id: recipe.id}) }}" method="post">
 								<input type="hidden" name="_method" value="DELETE">
-								<button type="submit" class="btn btn-danger btn-sm">Supprimer</a>
+								<button type="submit" class="btn btn-danger btn-sm">{{ 'Supprimer' | trans  }}</a>
 							</form>
 						</div>
 					</td>
