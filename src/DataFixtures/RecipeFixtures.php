@@ -2,9 +2,11 @@
 
 namespace App\DataFixtures;
 
+use App\DataFixtures\Provider\IngredientsProvider;
 use App\Entity\Category;
+use App\Entity\Ingredient;
+use App\Entity\Quantity;
 use App\Entity\Recipe;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -23,12 +25,21 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR');
         $faker->addProvider(new Restaurant($faker));
+        $faker->addProvider(new IngredientsProvider());
+
+        $ingredients = array_map(fn (string $name) => (new Ingredient())
+            ->setName($name)
+            ->setSlug(strtolower($this->slugger->slug($name))), $faker->getAllIngredients);
+
+        foreach ($ingredients as $ingredient) {
+            $manager->persist($ingredient);
+        }
 
         $categories = ['Entrée', 'Plat', 'Dessert'];
 
         for ($i = 0; $i < count($categories); $i++) {
-            $category = new Category();
-            $category->setName($categories[$i])
+            $category = (new Category())
+                ->setName($categories[$i])
                 ->setSlug(strtolower($this->slugger->slug($categories[$i])))
                 ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTime()))
                 ->setUpdatedAt(\DateTimeImmutable::createFromMutable($faker->dateTime()));
@@ -37,9 +48,9 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
         }
 
         for ($i = 1; $i <= 15; $i++) {
-            $recipe = new Recipe();
-            $title = $faker->foodname();
-            $recipe->setTitle($title)
+            $title = $faker->unique()->foodname();
+            $recipe = (new Recipe())
+                ->setTitle($title)
                 ->setSlug(strtolower($this->slugger->slug($title)))
                 ->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTime()))
                 ->setUpdatedAt(\DateTimeImmutable::createFromMutable($faker->dateTime()))
@@ -47,6 +58,15 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
                 ->setDuration($faker->numberBetween(5, 80))
                 ->setCategory($this->getReference($faker->randomElement($categories)))
                 ->setUser($this->getReference('USER' . $faker->numberBetween(1, 10)));
+
+            foreach ($faker->randomElements($ingredients, $faker->numberBetween(3, 7)) as $ingredient) {
+                $recipe->addQuantity((new Quantity())
+                        ->setAmount($faker->numberBetween(1, 200))
+                        ->setUnit($faker->getUnit)
+                        ->setIngredient($ingredient)
+                );
+            }
+
             $manager->persist($recipe);
         }
         $manager->flush();
