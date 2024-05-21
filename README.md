@@ -5,7 +5,7 @@ Site de recettes de cuisine en Symfony 7.0
 Page d'accueil en français: http://localhost:8000/fr/
 HomePage in English: http://localhost:8000/en/
 
-Adapté à partir d'un tutoriel de Graphikart
+Adapté à partir d'un tutoriel de Grafikart
 
 ## Installation
 - Installer les dépendances : 
